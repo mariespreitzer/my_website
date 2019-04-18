@@ -1,0 +1,199 @@
+/* Text Styles */
+h1 {
+  font-family: AvenirNext-Bold;
+  font-size: 48px;
+  color: #000000;
+  letter-spacing: 2px;
+  line-height: 70px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+h2 {
+  font-family: AvenirNext-Bold;
+  font-size: 24px;
+  color: #FFFFFF;
+  letter-spacing: 1.5px;
+  background-color: #000;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+h3 {
+  font-family: "AvenirNext-Bold";
+  font-size: 42px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+h4 {
+  font-family: AvenirNext-Bold;
+  font-size: 24px;
+  color: #000000;
+  letter-spacing: 0;
+  line-height: 35px;
+}
+
+.text {
+  font-family: AvenirNext-Regular;
+  font-size: 16px;
+  color: #000000;
+  letter-spacing: 0;
+  line-height: 26px;
+}
+
+.bold_text {
+  font-family: AvenirNext-DemiBold;
+  font-size: 16px;
+  color: #000000;
+  letter-spacing: 0;
+  line-height: 40px;
+}
+
+.text_info {
+  font-family: AvenirNext-Regular;
+  font-size: 16px;
+  color: #000000;
+  letter-spacing: 0;
+  line-height: 40px;
+}
+
+.text_bar {
+  font-family: AvenirNext-Regular;
+  font-size: 16px;
+  color: #000000;
+  letter-spacing: 0;
+  line-height: 10px;
+}
+
+.subheader {
+  font-family: AvenirNext-Regular;
+  font-size: 24px;
+  color: #000000;
+  letter-spacing: 0;
+  line-height: 35px;
+}
+
+.button {
+  text-transform: uppercase;
+  font-family: AvenirNext-DemiBold;
+  font-size: 16px;
+  color: #2D2D2D;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+/* Header */
+.header .col-2 {
+  background-color: #FFCC33;
+  padding: 4px 0px 2px 0px;
+  /* border-color: #FFCC33; */
+}
+
+/* Introduction */
+.introduction {
+  background-color: #FFFFFF;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.introduction .home {
+  text-align: center;
+}
+
+.introduction img {
+  width: 200px;
+  height: 200px;
+  vertical-align: middle;
+  border-radius: 100%;
+}
+
+/* Portfolio */
+.portfolio {
+  background-color: #FFCC33;
+}
+
+/* About Me */
+.about_me {
+  background-color: #FFFFFF;
+}
+
+.about_me .html_css {
+  width: 60%;
+  aria-valuenow: 60;
+  aria-valuemin: 0;
+  aria-valuemax: 100;
+}
+
+.about_me .Javascript {
+  width: 15%;
+  aria-valuenow: 15;
+  aria-valuemin: 0;
+  aria-valuemax: 100;
+}
+
+.about_me .Sketch {
+  width: 70%;
+  aria-valuenow: 70;
+  aria-valuemin: 0;
+  aria-valuemax: 100;
+}
+
+.about_me .Illustrator {
+  width: 35%;
+  aria-valuenow: 35;
+  aria-valuemin: 0;
+  aria-valuemax: 100;
+}
+
+.about_me .btn {
+  border-radius: 30px;
+}
+
+/* What I Do */
+.what_i_do {
+  background-color: #FFCC33;
+}
+
+/* My Journey */
+.my_journey {
+  background-color: #FFFFFF;
+  height: 500px;
+}
+
+/* Contact Form */
+.contact_form {
+  background-color: #FFFFFF;
+}
+
+.form_row {
+  background-color: #EEBF31;
+}
+
+.contact_form .btn {
+  background-color: #000;
+  color: #FFF;
+}
+
+
+
+/* Footer */
+.footer .this_is_me {
+  background-color: #FFCC33;
+}
+
+.footer .social_media img {
+  height: 35px;
+  text-align: right;
+  /* padding-top: 5px; */
+}
+
+/* Message flashing */
+.flash {
+  background-color: #FBB0B0;
+  padding: 10px;
+  width: 400px;
+}

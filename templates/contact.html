@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="static/css/template.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <!-- Icon Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- Google Fonts Muli -->
+  <link href="https://fonts.googleapis.com/css?family=Muli:200,300,400,400i,700" rel="stylesheet">
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <title>Marie's Life</title>
+</head>
+
+<body style="background-color: #F2F2F2">
+  {% extends "template.html" %}
+  {% block content %}
+
+  <!-- Header -->
+  <div class="container header button mt-5">
+    <div class="row align-items-end justify-content-between">
+      <div class="col-2 this_is_me">
+        <a href="{{ url_for('home') }}" style="color: #000000;">Home</a>
+      </div>
+      <div class="col-7 blank"></div>
+      <div class="col-2 contact_link">
+        <a href="{{ url_for('about') }}" style="color: #000000;">about me</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Contact Form-->
+  <div class="container contact_form py-5" style="background-color: #FFFFFF">
+    <div class="row">
+      <h2 class="pl-5" style="color: #FFFFFF; font-size: 20px;">contact me</h2>
+    </div>
+
+    {% for message in form.name.errors %}
+    <div class="flash" style="background-color: red">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in form.email.errors %}
+    <div class="flash" style="background-color: red">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in form.subject.errors %}
+    <div class="flash" style="background-color: red">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in form.message.errors %}
+    <div class="flash" style="background-color: red">{{ message }}</div>
+    {% endfor %}
+
+    <form action="{{ url_for('contact') }}" method="POST" role="form">
+      <!-- TODO: change the background color to dark yellow -->
+
+      <div class="container form-row mt-3">
+        {{ form.hidden_tag() }}
+        <div class="col-4 text">{{ form.name.label }}</div>
+        <div class="col-4 text">{{ form.email.label }}</div>
+        <div class="col-4 text">{{ form.subject.label }}</div>
+      </div>
+      <div class="container form-row field">
+        <div class="col-4">{{ form.name }}</div>
+        <div class="col-4">{{ form.email }}</div>
+        <div class="col-4">{{ form.subject }}</div>
+      </div>
+      <div class="container form-row mt-3 form_message">
+        <!-- TODO: MAKE FIELD BIGGER! -->
+        <div class="col text">
+          {{ form.message.label }}
+          <br>
+          {{ form.message }}
+        </div>
+      </div>
+      <br>
+
+      <button type="send" class="btn button ml-3 mt-3" value="Submit">send message</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <div class="container footer button mb-5 py-">
+    <div class="row align-items-center justify-content-between py-2">
+      <div class="col social_media">
+        <a href="https://www.facebook.com/profile.php?id=100000102691029&ref=bookmarks"><img src="static/images/img_fb.png" alt="Facebook"></a>
+        <a href="https://www.linkedin.com/in/marie-spreitzer-386330170/"><img src="static/images/img_linkedin.png" alt="LinkedIn"></a>
+        <a href="https://www.instagram.com/marruube/"><img src="static/images/img_instagram.png" alt="Instagram"></a>
+        <a href="https://www.pinterest.at/mariesp1997/"><img src="static/images/img_pinterest.png" alt="Pinterest"></a>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+
+</body>
+
+</html>
