@@ -3,18 +3,15 @@
 
 <head>
   <meta charset="utf-8" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Local CSS -->
+  <!-- Timeline JS -->
+  <script>document.getElementsByTagName("html")[0].className += " js";</script>
+  <!-- Timeline CSS & SCSS -->
+  <link rel="stylesheet" href="static/css/timeline.css">
+  <link rel="stylesheet" href="static/css/timeline.scss">
+  <!-- Main CSS -->
   <link rel="stylesheet" href="static/css/template.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <!-- Icon Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <!-- Google Fonts Muli -->
-  <link href="https://fonts.googleapis.com/css?family=Muli:200,300,400,400i,700" rel="stylesheet">
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   <title>Marie's Life</title>
 </head>
 
@@ -22,25 +19,78 @@
   {% extends "template.html" %}
   {% block content %}
 
+  <style media="screen">
+    .cool_button {
+        padding: 20px 40px;
+        background: none;
+        border: none;
+        position: relative;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 3px;
+        cursor: pointer;
+      }
+    .cool_button:after, .cool_button:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      border: 2px solid #FC3;
+      transition: -webkit-transform 0.2s;
+      transition: transform 0.2s;
+      transition: transform 0.2s, -webkit-transform 0.2s;
+    }
+    .cool_button_black:after, .cool_button_black:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      border: 2px solid #000;
+      transition: -webkit-transform 0.2s;
+      transition: transform 0.2s;
+      transition: transform 0.2s, -webkit-transform 0.2s;
+    }
+    .cool_button:after {
+      -webkit-transform: translate(3px, 3px);
+              transform: translate(3px, 3px);
+    }
+    .cool_button:before {
+      -webkit-transform: translate(-3px, -3px);
+              transform: translate(-3px, -3px);
+    }
+    .cool_button:hover:after, .cool_button:hover:before {
+      -webkit-transform: translate(0);
+              transform: translate(0);
+    }
+    .cd-h-timeline__event-title {
+      font-family: sans-serif;
+      font-size: 48px;
+      color: #000000;
+      letter-spacing: 2px;
+      line-height: 70px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .zoom:hover {
+      transform: scale(1.2);
+  </style>
 
   <!-- Header -->
   <div class="container header button mt-5">
     <div class="row align-items-end justify-content-between">
-      <div class="col-2 this_is_me">
-        <a href="{{ url_for('home') }}" style="color: #000000;">home</a>
-      </div>
+      <div class="col-2 this_is_me"><a href="{{ url_for('home') }}" style="color: #000000;">home</a></div>
       <div class="col-3 blank"></div>
-      <div class="col-2 contact_link">
-        this is me
-      </div>
+      <div class="col-2 contact_link">this is me</div>
       <div class="col-3 blank"></div>
-      <div class="col-2 contact_link">
-        <a href="{{ url_for('contact') }}" style="color: #000000;">contact</a>
-      </div>
+      <div class="col-2 contact_link"><a href="{{ url_for('contact') }}" style="color: #000000;">contact</a></div>
     </div>
   </div>
 
-  <!-- TODO: close the small gap between -->
 
   <!-- Introduction -->
   <div class="container introduction px-5">
@@ -57,35 +107,24 @@
   </div>
 
   <!-- Portfolio -->
-  <!-- TODO: make three other pages for the different parts -->
   <div class="container portfolio py-5">
     <div class="row">
       <h2 class="pl-5" style="color: #FFFFFF; font-size: 20px;">portfolio</h2>
     </div>
     <div class="row align-items-center mt-4 pt-5">
-      <!-- TODO: make them buttons and change color when hovered over -->
-      <div class="col-4 d-flex justify-content-center">
-        <img src="static/images/img_design.png">
-      </div>
-      <div class="col-4 d-flex justify-content-center">
-        <img src="static/images/img_code.png">
-      </div>
-      <div class="col-4 d-flex justify-content-center">
-        <img src="static/images/img_others.png">
+      <!-- TODO: hovered, make image move -->
+      <div class="col d-flex justify-content-center">
+        <!-- TODO: Change the image -->
+        <a href="{{ url_for('portfolio') }}"><img src="static/images/img_design.png"></a>
       </div>
     </div>
     <div class="row align-items-center py-5">
-      <div class="col-4 d-flex justify-content-center">
-        <h3>Design</h3>
-      </div>
-      <div class="col-4 d-flex justify-content-center">
-        <h3>Code</h3>
-      </div>
-      <div class="col-4 d-flex justify-content-center">
-        <h3>Others</h3>
+      <div class="col d-flex justify-content-center">
+        <a href="{{ url_for('portfolio') }}" id="portfolio_link" style="color: #000;"><button class="bold_text btn cool_button cool_button_black button">SEE WHAT I AM DOING</button></a>
       </div>
     </div>
   </div>
+
   <!-- About Me -->
   <div class="container about_me py-5">
     <div class="row">
@@ -108,7 +147,6 @@
           responsibility and on the other hand it is easy for me to follow certain instructions. I see my interpersonal skills as one of my greatest strengths, because my good mood will put a smile on your face.</p>
       </div>
       <div class="col-2 pl-5 bold_text">
-        <!-- TODO: align to start -->
         <p class="bold_text">Full Name</p>
         <p class="bold_text">Birthday</p>
         <p class="bold_text">City</p>
@@ -119,7 +157,7 @@
         <p class="text_info">Marie Spreitzer</p>
         <p class="text_info">18th June 1997</p>
         <p class="text_info">Berlin, Germany</p>
-        <p class="text_info">spreitzermarie@gmail.com</p> <!-- TODO: add link to mail -->
+        <p class="text_info"><a href="mailto:spreitzermarie@gmail.com" style="color:#FFCC33">spreitzermarie@gmail.com</a></p>
         <p class="text_info">+43 664 366 4561</p>
       </div>
       <div class="col-4 px-5 pt-3">
@@ -148,27 +186,31 @@
     <div class="row">
       <div class="col d-flex justify-content-center align-items-center">
         <!-- TODO: download CV when clicked -->
-        <button type="button" class="btn btn-warning button">Download CV</button>
+
+        <a href="CV_Marie_Spreitzer2.pdf" download style="color:#000">
+          <button type="button" class="btn cool_button button">Download CV</button></a>
+
       </div>
     </div>
   </div>
+
   <!-- What I Do -->
   <div class="container what_i_do py-5">
     <div class="row">
-      <h2 class="pl-5" style="color: #FFFFFF; font-size: 20px;">what i do</h2>
+      <h2 class="pl-5" style="color: #FFFFFF; font-size: 20px;">what i like to do</h2>
     </div>
-    <!-- TODO: do the javascript part & add animations-->
+    <!-- TODO: add animations-->
     <div class="row align-items-center mt-4 pt-5">
-      <div class="col-3 d-flex justify-content-center">
+      <div class="col-3 d-flex justify-content-center zoom">
         <img src="static/images/img_ideas.png">
       </div>
-      <div class="col-3 d-flex justify-content-center">
+      <div class="col-3 d-flex justify-content-center zoom">
         <img src="static/images/img_sketches.png">
       </div>
-      <div class="col-3 d-flex justify-content-center">
+      <div class="col-3 d-flex justify-content-center zoom">
         <img src="static/images/img_graphics.png">
       </div>
-      <div class="col-3 d-flex justify-content-center">
+      <div class="col-3 d-flex justify-content-center zoom">
         <img src="static/images/img_code2.png">
       </div>
     </div>
@@ -183,30 +225,176 @@
         <h4>Graphics</h4>
       </div>
       <div class="col-3 d-flex justify-content-center">
-        <h4>Code</h4>
+        <h4> Frontend Code</h4>
       </div>
     </div>
     <div class="row align-items-center pb-5">
       <div class="col-3 d-flex justify-content-center">
-        <p class="text">help you start</p>
+        <p class="text">think of something great</p>
       </div>
       <div class="col-3 d-flex justify-content-center">
-        <p class="text">see different looks</p>
+        <p class="text">see how it could look</p>
       </div>
       <div class="col-3 d-flex justify-content-center">
-        <p class="text">get a design</p>
+        <p class="text">get the design done</p>
       </div>
       <div class="col-3 d-flex justify-content-center">
-        <p class="text">build a project</p>
+        <p class="text">build the frontend of the project</p>
       </div>
     </div>
   </div>
+
   <!-- My Journey -->
   <div class="container my_journey py-5">
     <div class="row">
       <h2 class="pl-5" style="color: #FFFFFF; font-size: 20px;">my journey</h2>
     </div>
-    <!-- TODO: do the javascript part -->
+    <!-- TODO: TIMELINE -->
+    <section class="cd-h-timeline js-cd-h-timeline margin-bottom--md">
+      <div class="cd-h-timeline__events">
+        <ol>
+          <li class="cd-h-timeline__event cd-h-timeline__event--selected text-component">
+            <div class="cd-h-timeline__event-content container">
+              <h1 class="cd-h-timeline__event-title mt-5" style="font-family: AvenirNext-Bold, sans-serif">When it all started</h1>
+              <em class="cd-h-timeline__event-date" style="font-family: AvenirNext-Regular, sans-serif">June 18th, 1997</em>
+              <p class="cd-h-timeline__event-description text--subtle" style="font-family: AvenirNext-Regular, sans-serif">
+                I was born in Vienna.
+              </p>
+            </div>
+          </li>
+
+          <li class="cd-h-timeline__event text-component">
+            <div class="cd-h-timeline__event-content container">
+              <h1 class="cd-h-timeline__event-title mt-5" style="font-family: AvenirNext-Bold, sans-serif">When it all started</h1>
+              <em class="cd-h-timeline__event-date" style="font-family: AvenirNext-Regular, sans-serif">June 18th, 1997</em>
+              <p class="cd-h-timeline__event-description text--subtle" style="font-family: AvenirNext-Regular, sans-serif">
+                I was born in Vienna.
+              </p>
+            </div>
+          </li>
+
+          <li class="cd-h-timeline__event text-component">
+            <div class="cd-h-timeline__event-content container">
+              <h1 class="cd-h-timeline__event-title mt-5" style="font-family: AvenirNext-Bold, sans-serif">When it all started</h1>
+              <em class="cd-h-timeline__event-date" style="font-family: AvenirNext-Regular, sans-serif">June 18th, 1997</em>
+              <p class="cd-h-timeline__event-description text--subtle" style="font-family: AvenirNext-Regular, sans-serif">
+                I was born in Vienna.
+              </p>
+            </div>
+          </li>
+
+          <li class="cd-h-timeline__event text-component">
+            <div class="cd-h-timeline__event-content container">
+              <h1 class="cd-h-timeline__event-title mt-5" style="font-family: AvenirNext-Bold, sans-serif">When it all started</h1>
+              <em class="cd-h-timeline__event-date" style="font-family: AvenirNext-Regular, sans-serif">June 18th, 1997</em>
+              <p class="cd-h-timeline__event-description text--subtle" style="font-family: AvenirNext-Regular, sans-serif">
+                I was born in Vienna.
+              </p>
+            </div>
+          </li>
+
+          <li class="cd-h-timeline__event text-component">
+            <div class="cd-h-timeline__event-content container">
+              <h1 class="cd-h-timeline__event-title mt-5" style="font-family: AvenirNext-Bold, sans-serif">When it all started</h1>
+              <em class="cd-h-timeline__event-date" style="font-family: AvenirNext-Regular, sans-serif">June 18th, 1997</em>
+              <p class="cd-h-timeline__event-description text--subtle" style="font-family: AvenirNext-Regular, sans-serif">
+                I was born in Vienna.
+              </p>
+            </div>
+          </li>
+
+          <li class="cd-h-timeline__event text-component">
+            <div class="cd-h-timeline__event-content container">
+              <h1 class="cd-h-timeline__event-title mt-5" style="font-family: AvenirNext-Bold, sans-serif">When it all started</h1>
+              <em class="cd-h-timeline__event-date" style="font-family: AvenirNext-Regular, sans-serif">June 18th, 1997</em>
+              <p class="cd-h-timeline__event-description text--subtle" style="font-family: AvenirNext-Regular, sans-serif">
+                I was born in Vienna.
+              </p>
+            </div>
+          </li>
+
+          <li class="cd-h-timeline__event text-component">
+            <div class="cd-h-timeline__event-content container">
+              <h1 class="cd-h-timeline__event-title mt-5" style="font-family: AvenirNext-Bold, sans-serif">When it all started</h1>
+              <em class="cd-h-timeline__event-date" style="font-family: AvenirNext-Regular, sans-serif">June 18th, 1997</em>
+              <p class="cd-h-timeline__event-description text--subtle" style="font-family: AvenirNext-Regular, sans-serif">
+                I was born in Vienna.
+              </p>
+            </div>
+          </li>
+
+          <li class="cd-h-timeline__event text-component">
+            <div class="cd-h-timeline__event-content container">
+              <h1 class="cd-h-timeline__event-title mt-5" style="font-family: AvenirNext-Bold, sans-serif">When it all started</h1>
+              <em class="cd-h-timeline__event-date" style="font-family: AvenirNext-Regular, sans-serif">June 18th, 1997</em>
+              <p class="cd-h-timeline__event-description text--subtle" style="font-family: AvenirNext-Regular, sans-serif">
+                I was born in Vienna.
+              </p>
+            </div>
+          </li>
+
+          <li class="cd-h-timeline__event text-component">
+            <div class="cd-h-timeline__event-content container">
+              <h1 class="cd-h-timeline__event-title mt-5" style="font-family: AvenirNext-Bold, sans-serif">When it all started</h1>
+              <em class="cd-h-timeline__event-date" style="font-family: AvenirNext-Regular, sans-serif">June 18th, 1997</em>
+              <p class="cd-h-timeline__event-description text--subtle" style="font-family: AvenirNext-Regular, sans-serif">
+                I was born in Vienna.
+              </p>
+            </div>
+          </li>
+
+          <li class="cd-h-timeline__event text-component">
+            <div class="cd-h-timeline__event-content container">
+              <h1 class="cd-h-timeline__event-title mt-5" style="font-family: AvenirNext-Bold, sans-serif">When it all started</h1>
+              <em class="cd-h-timeline__event-date" style="font-family: AvenirNext-Regular, sans-serif">June 18th, 1997</em>
+              <p class="cd-h-timeline__event-description text--subtle" style="font-family: AvenirNext-Regular, sans-serif">
+                I was born in Vienna.
+              </p>
+            </div>
+          </li>
+
+          <li class="cd-h-timeline__event text-component">
+            <div class="cd-h-timeline__event-content container">
+              <h1 class="cd-h-timeline__event-title mt-5" style="font-family: AvenirNext-Bold, sans-serif">When it all started</h1>
+              <em class="cd-h-timeline__event-date" style="font-family: AvenirNext-Regular, sans-serif">June 18th, 1997</em>
+              <p class="cd-h-timeline__event-description text--subtle" style="font-family: AvenirNext-Regular, sans-serif">
+                I was born in Vienna.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div> <!-- timeline__events -->
+      <div class="cd-h-timeline__container container">
+        <div class="cd-h-timeline__dates">
+          <div class="cd-h-timeline__line">
+            <ol>
+              <li><a href="#0" data-date="18/06/1997" class="cd-h-timeline__date cd-h-timeline__date--selected">1997</a></li>
+              <li><a href="#0" data-date="28/02/2014" class="cd-h-timeline__date">28 Feb</a></li>
+              <li><a href="#0" data-date="20/04/2014" class="cd-h-timeline__date">20 Mar</a></li>
+              <li><a href="#0" data-date="20/05/2014" class="cd-h-timeline__date">20 May</a></li>
+              <li><a href="#0" data-date="09/07/2014" class="cd-h-timeline__date">09 Jul</a></li>
+              <li><a href="#0" data-date="30/08/2014" class="cd-h-timeline__date">30 Aug</a></li>
+              <li><a href="#0" data-date="15/09/2014" class="cd-h-timeline__date">15 Sep</a></li>
+              <li><a href="#0" data-date="01/11/2014" class="cd-h-timeline__date">01 Nov</a></li>
+              <li><a href="#0" data-date="10/12/2014" class="cd-h-timeline__date">10 Dec</a></li>
+              <li><a href="#0" data-date="19/01/2015" class="cd-h-timeline__date">29 Jan</a></li>
+              <li><a href="#0" data-date="03/03/2015" class="cd-h-timeline__date">3 Mar</a></li>
+            </ol>
+
+            <span class="cd-h-timeline__filling-line" aria-hidden="true"></span>
+          </div>
+          <!--timeline__line -->
+        </div>
+        <!--timeline__dates -->
+
+        <ul>
+          <li><a href="#0" class="text--replace cd-h-timeline__navigation cd-h-timeline__navigation--prev cd-h-timeline__navigation--inactive">Prev</a></li>
+          <li><a href="#0" class="text--replace cd-h-timeline__navigation cd-h-timeline__navigation--next">Next</a></li>
+        </ul>
+      </div>
+      <!--timeline__container -->
+
+    </section>
   </div>
 
 
@@ -228,6 +416,12 @@
       </div>
     </div>
   </div>
+
+
+  <!-- JavaScript Part -->
+  <script src="static/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
+  <script src="static/js/swipe-content.js"></script> <!-- A Vanilla JavaScript plugin to detect touch interactions -->
+  <script src="static/js/main.js"></script>
 
   {% endblock %}
 </body>

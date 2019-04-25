@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="static/css/template.css">
+  <link rel="stylesheet" href="static/css/game.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <title>Marie's Life</title>
+</head>
+
+<body style="background-color: #F2F2F2">
+  {% extends "template.html" %}
+  {% block content %}
+
+
+  <!-- Header -->
+  <div class="container header button mt-5">
+    <div class="row align-items-end justify-content-between">
+      <div class="col-2 this_is_me">
+        <a href="{{ url_for('about') }}" style="color: #000000;">about me</a>
+      </div>
+      <div class="col-7 blank"></div>
+      <div class="col-2 contact_link">
+        <a href="{{ url_for('contact') }}" style="color: #000000;">contact</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Introduction -->
+  <div class="container introduction home px-5" style="height: 600px">
+    <h1 style="text-align: center">Wanna get to know me?</h1>
+    <p class="text" style="line-height: 5px; text-align: center">Win the game first, then I'll show you who I am!</p>
+    <p class="text" style="line-height: 5px; text-align: center">Get the fruit <strong>5 times</strong> in order to continue!</p>
+    <!-- GAME PART -->
+    <div id="score" class="mb-3">0</div>
+    <div class="row d-flex justify-content-center align-items-start">
+      <div class="mt-4"><canvas id="gameCanvas" width="1040" height="250"></canvas></div>
+
+      <div id="introScreen">
+        <div id="introScreenContent">
+          <div id="btnStart" class="button_game" onclick="startGame()">Start the game</div>
+        </div>
+      </div>
+
+      <!-- TODO: make the button work!! -->
+      <div id="endScreen">
+        <div id="endScreenContent" style="background-color: #FC3">
+          <div id="btnReplay" class="button_game" onclick="tryAgain()"><a href="{{ url_for('game') }}" style="color: #FFF">Try again!</a></div>
+        </div>
+      </div>
+
+      <div id="winScreen">
+        <div id="winScreenContent">
+          <div id="btnWin" class="button_game" onclick="winGame()"><a href="{{ url_for('about') }}" style="color: #FFF">GO AHEAD!</a></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <!-- Footer -->
+  <div class="container footer button mb-5 py-">
+    <div class="row align-items-center justify-content-between py-2">
+      <div class="col social_media">
+        <a href="https://www.facebook.com/profile.php?id=100000102691029&ref=bookmarks"><img src="static/images/img_fb.png" alt="Facebook"></a>
+        <a href="https://www.linkedin.com/in/marie-spreitzer-386330170/"><img src="static/images/img_linkedin.png" alt="LinkedIn"></a>
+        <a href="https://www.instagram.com/marruube/"><img src="static/images/img_instagram.png" alt="Instagram"></a>
+        <a href="https://www.pinterest.at/mariesp1997/"><img src="static/images/img_pinterest.png" alt="Pinterest"></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script src="static/js/script.js"></script> -->
+  <script type="text/javascript">
+    document.getElementById("gameCanvas");
+    document.getElementById("score");
+
+    const GAME_SPEED = 50;
+    const CANVAS_BORDER_COLOUR = 'black';
+    const CANVAS_BACKGROUND_COLOUR = "white";
+    const SNAKE_COLOUR = '#ffcc33';
+    const SNAKE_BORDER_COLOUR = 'black';
+    const FOOD_COLOUR = 'red';
+    const FOOD_BORDER_COLOUR = 'darkred';
+    let snake = [{
+        x: 150,
+        y: 150
+      },
+      {
+        x: 140,
+        y: 150
+      },
+      {
+        x: 130,
+        y: 150
+      },
+      {
+        x: 120,
+        y: 150
+      },
+      {
+        x: 110,
+        y: 150
+      }
+    ]
+    let score = 0;
+
+    let changingDirection = false;
+
+    let foodX;
+
+    let foodY;
+
+    let dx = 10;
+
+    let dy = 0;
+
+    const gameCanvas = document.getElementById("gameCanvas");
+
+    const ctx = gameCanvas.getContext("2d");
+
+    createFood();
+
+    document.addEventListener("keydown", changeDirection);
+    // Main function of the game
+    function main() {
+      // if (didGameEnd()) return;
+      if (didGameEnd()) {
+        tryAgain();
+      }
+
+      setTimeout(function onTick() {
+        changingDirection = false;
+        clearCanvas();
+        drawFood();
+        advanceSnake();
+        drawSnake();
+        // Call game again
+        main();
+      }, GAME_SPEED)
+    }
+
+
+    function clearCanvas() {
+      ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
+      ctx.strokestyle = CANVAS_BORDER_COLOUR;
+      ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+      ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+    }
+
+    function drawFood() {
+      ctx.fillStyle = FOOD_COLOUR;
+      ctx.strokestyle = FOOD_BORDER_COLOUR;
+      ctx.fillRect(foodX, foodY, 10, 10);
+      ctx.strokeRect(foodX, foodY, 10, 10);
+    }
+
+    function advanceSnake() {
+      const head = {
+        x: snake[0].x + dx,
+        y: snake[0].y + dy
+      };
+      snake.unshift(head);
+      const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
+      if (didEatFood) {
+        score += 1;
+        document.getElementById('score').innerHTML = score;
+        // WON THE GAME
+        if (score == 2) {
+          winGame();
+          endGame();
+        }
+        createFood();
+      } else {
+        snake.pop();
+      }
+    }
+
+    function didGameEnd() {
+      for (let i = 4; i < snake.length; i++) {
+        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true
+      }
+      const hitLeftWall = snake[0].x < 0;
+      const hitRightWall = snake[0].x > gameCanvas.width - 10;
+      const hitToptWall = snake[0].y < 0;
+      const hitBottomWall = snake[0].y > gameCanvas.height - 10;
+      return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall;
+    }
+
+
+    function randomTen(min, max) {
+      return Math.round((Math.random() * (max - min) + min) / 10) * 10;
+    }
+
+    function createFood() {
+      foodX = randomTen(0, gameCanvas.width - 10);
+      foodY = randomTen(0, gameCanvas.height - 10);
+      snake.forEach(function isFoodOnSnake(part) {
+        const foodIsoNsnake = part.x == foodX && part.y == foodY;
+        if (foodIsoNsnake) createFood();
+      });
+    }
+
+    function drawSnake() {
+      snake.forEach(drawSnakePart)
+    }
+
+    function drawSnakePart(snakePart) {
+      ctx.fillStyle = SNAKE_COLOUR;
+      ctx.strokestyle = SNAKE_BORDER_COLOUR;
+      ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
+      ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+    }
+
+    function changeDirection(event) {
+      const LEFT_KEY = 37;
+      const RIGHT_KEY = 39;
+      const UP_KEY = 38;
+      const DOWN_KEY = 40;
+
+      if (changingDirection) return;
+      changingDirection = true;
+
+      const keyPressed = event.keyCode;
+      const goingUp = dy === -10;
+      const goingDown = dy === 10;
+      const goingRight = dx === 10;
+      const goingLeft = dx === -10;
+      if (keyPressed === LEFT_KEY && !goingRight) {
+        dx = -10;
+        dy = 0;
+      }
+
+      if (keyPressed === UP_KEY && !goingDown) {
+        dx = 0;
+        dy = -10;
+      }
+
+      if (keyPressed === RIGHT_KEY && !goingLeft) {
+        dx = 10;
+        dy = 0;
+      }
+
+      if (keyPressed === DOWN_KEY && !goingUp) {
+        dx = 0;
+        dy = 10;
+      }
+    }
+
+    function winGame() {
+      document.getElementById("winScreen").style.display = "block";
+    }
+
+    function startGame() {
+      document.getElementById("introScreen").style.display = "none";
+      main();
+    }
+
+    function tryAgain() {
+      document.getElementById("endScreen").style.display = "block";
+      main();
+    }
+  </script>
+
+  {% endblock %}
+
+</body>
+
+</html>

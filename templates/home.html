@@ -7,20 +7,62 @@
   <link rel="stylesheet" href="static/css/template.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <!-- Icon Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <!-- Google Fonts Muli -->
-  <link href="https://fonts.googleapis.com/css?family=Muli:200,300,400,400i,700" rel="stylesheet">
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   <title>Marie's Life</title>
 </head>
 
 <body style="background-color: #F2F2F2">
   {% extends "template.html" %}
   {% block content %}
+
+  <style media="screen">
+    .cool_button {
+      z-index: 0;
+  padding: 20px 40px;
+  background: none;
+  border: none;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 3px;
+  cursor: pointer;
+  }
+  .cool_button:after, .cool_button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border: 2px solid #FC3;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+  }
+  .cool_button_black:after, .cool_button_black:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border: 2px solid #000;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+  }
+  .cool_button:after {
+  -webkit-transform: translate(3px, 3px);
+          transform: translate(3px, 3px);
+  }
+  .cool_button:before {
+  -webkit-transform: translate(-3px, -3px);
+          transform: translate(-3px, -3px);
+  }
+  .cool_button:hover:after, .cool_button:hover:before {
+  -webkit-transform: translate(0);
+          transform: translate(0);
+  }
+  </style>
 
   <!-- Header -->
   <div class="container header button mt-5">
@@ -37,15 +79,17 @@
 
 
   <!-- Introduction -->
-  <div class="container introduction home px-5">
-    <h1>Hi! I am Marie.</h1>
-    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <div class="container introduction home align-items-center">
+    <div class="row justify-content-center">
+      <h1>Hi! I am Marie.</h1>
+    </div>
+    <div class="row justify-content-center">
+      <p class="text">This side is still under construction but will be filled with all my beautiful content soon</p>
+    </div>
+    <div class="row justify-content-center">
+      <a href="{{ url_for('game') }}" style="color: #000000;"><button type="button" class="cool_button button">Find out more about me!</button></a>
+    </div>
   </div>
-  </div>
-  </div>
-  </div>
-  <!-- TODO: add button -->
 
   <!-- Footer -->
   <div class="container footer button mb-5 py-">

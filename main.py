@@ -20,9 +20,17 @@ mail.init_app(app)
 def home():
     return render_template("home.html")
 
+@app.route("/game")
+def game():
+    return render_template("game.html")
+
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+@app.route("/portfolio")
+def portfolio():
+    return render_template("portfolio.html")
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():

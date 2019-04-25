@@ -1,0 +1,96 @@
+#score {
+  text-align: center;
+  font-family: "AvenirNext-Bold";
+  font-size: 26px;
+  color: #000000;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+#introScreen {
+  position: absolute;
+  z-index: 100;
+  width: 1050px;
+  height: 300px;
+  background-color: #FC3;
+  text-align: center;
+  /* margin-top: 25px;
+  margin-right: 50px; */
+}
+
+#introScreenContent {
+  z-index: 100;
+  width: 400px;
+  height: 200px;
+  background-color: #FC3;
+  margin: 20px auto;
+  padding-right: 20px;
+  padding-top: 50px;
+  text-align: center;
+}
+
+#endScreen {
+  position: absolute;
+  z-index: 101;
+  width: 1050px;
+  height: 300px;
+  background-color: #FC3;
+  text-align: center;
+  /* margin-top: 25px;
+  margin-right: 50px; */
+  display: none;
+}
+
+#endScreenContent {
+  z-index: 101;
+  width: 400px;
+  height: 200px;
+  background-color: #FC3;
+  margin: 20px auto;
+  padding-right: 20px;
+  padding-top: 50px;
+  text-align: center;
+}
+
+#winScreen {
+  position: absolute;
+  z-index: 102;
+  width: 1050px;
+  height: 300px;
+  background-color: #FC3;
+  text-align: center;
+  margin-top: 25px;
+  margin-right: 50px;
+  display: none;
+}
+
+#winScreenContent {
+  z-index: 102;
+  width: 400px;
+  height: 200px;
+  background-color: #FC3;
+  margin: 20px auto;
+  padding-right: 20px;
+  padding-top: 50px;
+  text-align: center;
+}
+
+.button_game {
+  text-transform: uppercase;
+  font-family: AvenirNext-DemiBold;
+  font-size: 16px;
+  color: #FFF;
+  letter-spacing: 0;
+  text-align: center;
+  position: absolute;
+  padding: 10px;
+  border-radius: 10px;
+  width: 200px;
+  background-color: #000;
+  margin: 40px 100px;
+}
+
+.button_game:hover {
+  background-color: #555;
+}
